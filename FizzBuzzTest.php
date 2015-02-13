@@ -2,6 +2,13 @@
 
 class FizzBuzzTest extends PHPUnit_Framework_TestCase 
 {
+  private $fb;
+
+  function setUp()
+  {
+    $this->fb = new FizzBuzz();
+  }
+
   function testIsRunning()
   {
     $this->assertTrue(true);
@@ -9,55 +16,49 @@ class FizzBuzzTest extends PHPUnit_Framework_TestCase
 
   function testFizzBuzzCanRun()
   {
-    $f = new FizzBuzz();
-    $this->assertTrue(method_exists($f, 'run'));
+    $this->assertTrue(method_exists($this->fb, 'run'));
   }
 
-  function testFizzBuzzReturnsInt()
+  function testFizzBuzzReturns1WithOne()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('1', $f->run(1));
+    $this->assertEquals('1', $this->fb->run(1));
   } 
 
   function testRunReturnsFizzWithThree()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('Fizz', $f->run(3));
+    $this->assertEquals('Fizz', $this->fb->run(3));
   }
 
   function testRunReturnsFizzWithSix()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('Fizz', $f->run(6));
+    $this->assertEquals('Fizz', $this->fb->run(6));
   }
 
   function testRunReturnsBuzzWithTen()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('Buzz', $f->run(10));
+    $this->assertEquals('Buzz', $this->fb->run(10));
   }
 
   function testRunReturnsFizzBuzzWithFifteen()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('FizzBuzz', $f->run(15));
+    $this->assertEquals('FizzBuzz', $this->fb->run(15));
   }
 
   function testRunWithSomeNumbers()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('Buzz', $f->run(20));
-    $this->assertEquals('Fizz', $f->run(9));
-    $this->assertEquals('FizzBuzz', $f->run(30));
+    $this->assertEquals('Buzz', $this->fb->run(20));
+    $this->assertEquals('Fizz', $this->fb->run(9));
+    $this->assertEquals('FizzBuzz', $this->fb->run(30));
+    $this->assertEquals('13', $this->fb->run(13));
+    $this->assertEquals('16', $this->fb->run(16));
   }
 
   function testIntroducingBang()
   {
-    $f = new FizzBuzz();
-    $this->assertEquals('Bang', $f->run(7));
-    $this->assertEquals('Bang', $f->run(14));
-    $this->assertEquals('FizzBang', $f->run(21));
-    $this->assertEquals('FizzBuzzBang', $f->run(105));
+    $this->assertEquals('Bang', $this->fb->run(7));
+    $this->assertEquals('Bang', $this->fb->run(14));
+    $this->assertEquals('FizzBang', $this->fb->run(21));
+    $this->assertEquals('FizzBuzzBang', $this->fb->run(105));
   }
   
 }
