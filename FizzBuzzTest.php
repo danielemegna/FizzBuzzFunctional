@@ -50,6 +50,15 @@ class FizzBuzzTest extends PHPUnit_Framework_TestCase
     $this->assertEquals('Fizz', $f->run(9));
     $this->assertEquals('FizzBuzz', $f->run(30));
   }
+
+  function testIntroducingBang()
+  {
+    $f = new FizzBuzz();
+    $this->assertEquals('Bang', $f->run(7));
+    $this->assertEquals('Bang', $f->run(14));
+    $this->assertEquals('FizzBang', $f->run(21));
+    $this->assertEquals('FizzBuzzBang', $f->run(105));
+  }
   
 }
 
@@ -61,7 +70,8 @@ class FizzBuzz
   {
     $this->dictionary = [
       3 => "Fizz",
-      5 => "Buzz"
+      5 => "Buzz",
+      7 => "Bang"
     ];
   }
   
