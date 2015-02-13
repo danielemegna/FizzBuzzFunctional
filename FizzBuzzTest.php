@@ -42,36 +42,47 @@ class FizzBuzzTest extends PHPUnit_Framework_TestCase
     $f = new FizzBuzz();
     $this->assertEquals('FizzBuzz', $f->run(15));
   }
+
+  function testRunWithSomeNumbers()
+  {
+    $f = new FizzBuzz();
+    $this->assertEquals('Buzz', $f->run(20));
+    $this->assertEquals('Fizz', $f->run(9));
+    $this->assertEquals('FizzBuzz', $f->run(30));
+  }
   
 }
 
 class FizzBuzz
 {
+  private $dictionary;
+
+  function __construct()
+  {
+    $this->dictionary = [
+      3 => "Fizz",
+      5 => "Buzz"
+    ];
+  }
+  
   function run($n)
   {
+    $factors = array_keys($this->dictionary);
     $isNDivisibileByFactor = function($factor) use($n) { 
       return (($n % $factor) == 0);
     };
 
-    $dictionary = [
-      3 => "Fizz",
-      5 => "Buzz"
-    ];
-
-    $factors = array_keys($dictionary);
-    $result = array_values(
+    $involvedFactors = array_values(
       array_filter($factors, $isNDivisibileByFactor)
     );
 
-    if(sizeof($result) == 0)
+    if(sizeof($involvedFactors) == 0)
       return $n;
 
-    $string = '';
-    foreach($result as $factor)
-      $string .= $dictionary[$factor]; 
-
-    return $string;
-
+    $translateWithDictionary = function($carry, $item) {
+      return $carry . $this->dictionary[$item];
+    };
+    return array_reduce($involvedFactors, $translateWithDictionary, '');
   }
 
 }
